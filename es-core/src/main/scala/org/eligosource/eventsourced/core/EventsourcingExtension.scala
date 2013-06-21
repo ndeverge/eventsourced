@@ -114,6 +114,9 @@ class EventsourcingExtension(system: ExtendedActorSystem) extends Extension {
     processor
   }
 
+  def processorOfs(props: Props, name: akka.japi.Option[String], actorRefFactory: ActorRefFactory): ActorRef =
+    processorOf(props, name.asScala)(actorRefFactory)
+
   /**
    * Creates and registers a [[org.eligosource.eventsourced.core.Channel]]. The channel is
    * registered under the id specified by `props.id`. If `props.name` is defined it is also
@@ -447,6 +450,9 @@ object EventsourcingExtension extends ExtensionId[EventsourcingExtension] with E
     extension.registerJournal(journal)
     extension
   }
+
+  def create(system: ActorSystem, journal: ActorRef): EventsourcingExtension =
+    apply(system, journal)
 
   def createExtension(system: ExtendedActorSystem) =
     new EventsourcingExtension(system)

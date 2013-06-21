@@ -191,3 +191,7 @@ case class LeveldbJournalProps(
   }
 }
 
+object LeveldbJournalProps {
+  def create(dir: File): LeveldbJournalProps =
+    LeveldbJournalProps(dir)
+}

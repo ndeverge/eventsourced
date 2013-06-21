@@ -67,11 +67,19 @@ case class Message(
     if (confirmationTarget != null && confirmationPrototype != null) confirmationTarget ! confirmationPrototype.copy(positive = pos)
   }
 
+  def withEvent(event: Any): Message =
+    copy(event = event)
+
   private [eventsourced] def withTimestamp: Message = withTimestamp(System.currentTimeMillis)
   private [eventsourced] def withTimestamp(timestamp: Long): Message = copy(timestamp = timestamp)
   private [eventsourced] def clearConfirmationSettings = copy(
     confirmationTarget = null,
     confirmationPrototype = null)
+}
+
+object Message {
+  def create(event: Any): Message =
+    Message(event)
 }
 
 /**

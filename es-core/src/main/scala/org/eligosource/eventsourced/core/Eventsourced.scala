@@ -122,3 +122,5 @@ private [eventsourced] object Eventsourced {
   case object CompleteProcessing
   case object Completed
 }
+
+// Java API

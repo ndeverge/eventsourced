@@ -73,6 +73,11 @@ case class DefaultChannelProps(
     actor(new DefaultChannel(id, journal, destination), name, dispatcherName)
 }
 
+object DefaultChannelProps {
+  def create(id: Int, destination: ActorRef): DefaultChannelProps =
+    DefaultChannelProps(id, destination)
+}
+
 /**
  * [[org.eligosource.eventsourced.core.ReliableChannel]] configuration object.
  */
